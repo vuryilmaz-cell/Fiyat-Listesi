@@ -1,0 +1,89 @@
+
+
+@media print
+{
+
+   @page 
+   {
+	   size: A4 landscape;
+	   margin:1cm;
+	   max-height:20%;
+	  max-width:20%
+	   	
+	}
+	
+	body
+	{
+		background:none;
+		border:none;
+		background-image:none;
+	}
+	
+	body #body_text
+	{
+		border:none;
+		background-image:none;
+		border-width:0px;
+	}
+	
+	body #body_div
+	{
+		border:none;
+		background-image:none;
+		background:none;
+		border-width:0px;
+	}
+	
+	#admin_menu_div 
+	{
+		display:none;
+	}
+	
+	.seperator
+	{
+	
+		width:100%;
+		display: block; /* unhide all tabs */
+		/*page-break-before: always;*/
+		/*page-break-inside : avoid;*/
+		background-color:#CCC;
+
+	}
+	
+	
+	
+	.page_break_div
+	{
+		page-break-before: always;
+		display:block;
+		width:100%;
+		float:left;
+		height:30px;
+		background-color:#0F0;
+		position: relative;
+	}
+	
+	.main_cat_select
+	{
+		display:none;
+	}
+	
+	#top_div .main_menu 
+	{
+		display:none
+	}
+	
+
+	
+	.menu_active
+	{
+		display:none;
+	}
+	
+	.admin_menu
+	{
+		display:none;
+	}
+
+
+}

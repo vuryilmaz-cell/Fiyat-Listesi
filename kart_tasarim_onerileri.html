@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<title>Kampanya Kartı — Tasarım Önerileri</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:        #0d2137;
+  --navy-mid:    #163556;
+  --navy-light:  #1e4a77;
+  --amber:       #e8a020;
+  --amber-light: #f5c355;
+  --amber-pale:  #fdf3dc;
+}
+body { font-family: 'Barlow', sans-serif; min-height: 100vh; }
+
+/* NAV */
+.top-nav {
+  background: var(--navy);
+  border-bottom: 3px solid var(--amber);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); padding: 18px 32px 18px 0;
+  border-right: 1px solid rgba(255,255,255,0.1); margin-right: 8px;
+}
+.nav-brand span { color: var(--amber); }
+.nav-tab {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.38); padding: 21px 20px 18px;
+  cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px;
+  transition: color .2s, border-color .2s;
+}
+.nav-tab:hover { color: rgba(255,255,255,0.75); }
+.nav-tab.active { color: #fff; border-color: var(--amber); }
+
+/* PAGES */
+.page { display: none; padding: 48px 40px 80px; }
+.page.active { display: block; }
+
+/* SEC HEAD */
+.sec-head { margin-bottom: 28px; }
+.sec-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--amber);
+  background: var(--navy); padding: 5px 14px; border-radius: 2px; margin-bottom: 10px;
+}
+.sec-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.sec-desc { font-size: 13px; color: #647a90; line-height: 1.7; max-width: 580px; }
+
+/* PICK */
+.pick-wrap { margin-top: 28px; }
+.pick-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--navy); color: #fff; border: none;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase; padding: 12px 24px; border-radius: 3px;
+  cursor: pointer; transition: background .15s, transform .1s;
+}
+.pick-btn:hover { background: var(--amber); color: var(--navy); transform: translateY(-1px); }
+.pick-btn .arr { transition: transform .2s; }
+.pick-btn:hover .arr { transform: translateX(5px); }
+
+/* ══════════════════════════════════════════
+   A — BLUEPRINT / KOYU TEKNİK
+   ══════════════════════════════════════════ */
+#page-a { background: #08131f; }
+#page-a .sec-title { color: #b8d0e8; }
+#page-a .sec-desc  { color: #4a6a84; }
+#page-a .sec-tag   { background: rgba(232,160,32,.12); }
+
+.bp-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 14px; border-bottom: 1px solid rgba(100,150,200,.12); margin-bottom: 2px;
+}
+.bp-corner-wrap { display: flex; align-items: center; gap: 12px; }
+.bp-corner {
+  width: 18px; height: 18px;
+  border-top: 2px solid var(--amber); border-left: 2px solid var(--amber);
+}
+.bp-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(200,220,240,.55); }
+.bp-count { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; color: rgba(200,220,240,.2); letter-spacing: 1px; }
+
+.bp-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(100,150,200,.08); border: 1px solid rgba(100,150,200,.1); margin-top: 2px; }
+.bp-kart { background: #0c1c2c; cursor: pointer; position: relative; overflow: hidden; transition: background .15s; }
+.bp-kart:hover { background: #0f2135; }
+.bp-kart::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 16px; height: 16px;
+  border-top: 1px solid rgba(232,160,32,.3); border-left: 1px solid rgba(232,160,32,.3);
+  transition: width .3s, height .3s, border-color .3s;
+}
+.bp-kart:hover::before { width: 36px; height: 36px; border-color: var(--amber); }
+
+.bp-img {
+  height: 104px; display: flex; align-items: center; justify-content: center;
+  font-size: 42px; position: relative; overflow: hidden;
+  background: radial-gradient(ellipse at center, rgba(30,74,119,.35) 0%, transparent 70%);
+}
+.bp-img::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(100,150,200,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(100,150,200,.05) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.bp-rozet {
+  position: absolute; bottom: 7px; right: 7px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 8px; font-weight: 800;
+  letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px;
+}
+.bp-body { padding: 13px 15px 15px; }
+.bp-cat { font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,220,240,.28); margin-bottom: 4px; }
+.bp-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: #bdd4ea; line-height: 1.3; margin-bottom: 13px; }
+.bp-foot { display: flex; align-items: flex-end; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(100,150,200,.1); }
+.bp-price-lbl { font-size: 8px; color: rgba(200,220,240,.22); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1px; }
+.bp-price { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 700; color: var(--amber); }
+.bp-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(200,220,240,.12); transition: background .15s, box-shadow .15s; }
+.bp-kart:hover .bp-dot { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+
+/* ══════════════════════════════════════════
+   B — VİTRİN
+   ══════════════════════════════════════════ */
+#page-b { background: #f5f7fa; }
+
+.vt-wrap { background: #fff; border: 1px solid #dde4ee; border-radius: 8px; overflow: hidden; box-shadow: 0 6px 32px rgba(13,33,55,.07); }
+.vt-head { display: flex; align-items: stretch; background: var(--navy); }
+.vt-head-amber {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--amber); padding: 16px 32px 16px 20px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%);
+}
+.vt-head-icon { font-size: 18px; }
+.vt-head-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--navy); }
+.vt-head-right { flex: 1; display: flex; align-items: center; justify-content: flex-end; padding: 0 20px; gap: 5px; }
+.vt-hdot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.15); }
+.vt-hdot:first-child { background: rgba(255,255,255,.4); }
+
+.vt-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+.vt-kart { border-right: 1px solid #eef1f7; border-bottom: 1px solid #eef1f7; cursor: pointer; position: relative; overflow: hidden; transition: box-shadow .18s; }
+.vt-kart:nth-child(4n) { border-right: none; }
+.vt-kart:hover { box-shadow: inset 0 -3px 0 var(--amber), 0 -2px 12px rgba(232,160,32,.06) inset; }
+
+.vt-img {
+  height: 112px; background: linear-gradient(135deg, #f3f6fb 0%, #eaf0f8 100%);
+  display: flex; align-items: center; justify-content: center; font-size: 44px;
+  position: relative; overflow: hidden; transition: background .2s;
+}
+.vt-kart:hover .vt-img { background: linear-gradient(135deg, #fdf6e8 0%, #f5e8c4 100%); }
+.vt-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 24px; background: linear-gradient(to top, #fff, transparent); }
+.vt-rozet { position: absolute; top: 10px; left: 0; font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #fff; padding: 4px 10px 4px 12px; border-radius: 0 3px 3px 0; }
+.vt-body { padding: 14px 16px 16px; }
+.vt-cat { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy-light); opacity: .55; margin-bottom: 3px; }
+.vt-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 14px; }
+.vt-foot { display: flex; align-items: flex-end; justify-content: space-between; }
+.vt-price-lbl { font-size: 8px; color: #a0b0c4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1px; }
+.vt-price { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+.vt-arr { width: 28px; height: 28px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; opacity: 0; transform: scale(.6); transition: opacity .2s, transform .2s; }
+.vt-kart:hover .vt-arr { opacity: 1; transform: scale(1); }
+
+/* ══════════════════════════════════════════
+   C — EDİTORYAL / MASONRY
+   ══════════════════════════════════════════ */
+#page-c { background: #faf9f7; }
+
+.ed-head { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 14px; border-bottom: 2px solid var(--navy); margin-bottom: 18px; }
+.ed-kicker { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+.ed-big { font-family: 'Instrument Serif', serif; font-size: 32px; font-style: italic; color: var(--navy); letter-spacing: -1px; line-height: 1; }
+.ed-count { font-size: 12px; color: #8a9ab0; padding-bottom: 4px; }
+
+.ed-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 14px; }
+.ed-kart { background: #fff; border: 1px solid #e4e0d8; border-radius: 4px; overflow: hidden; cursor: pointer; position: relative; transition: transform .2s, box-shadow .2s; }
+.ed-kart:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(13,33,55,.1); }
+.ed-kart.hero { grid-row: 1 / 3; }
+
+.ed-img { height: 120px; background: #f4f2ee; display: flex; align-items: center; justify-content: center; font-size: 44px; position: relative; border-bottom: 1px solid #e4e0d8; }
+.ed-kart.hero .ed-img { height: 190px; font-size: 64px; }
+.ed-rozet { position: absolute; top: 10px; right: 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 8px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+.ed-body { padding: 15px; }
+.ed-cat { font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--navy-light); opacity: .45; margin-bottom: 4px; }
+.ed-name { font-family: 'Instrument Serif', serif; font-size: 15px; color: var(--navy); line-height: 1.3; margin-bottom: 12px; }
+.ed-kart.hero .ed-name { font-size: 19px; }
+.ed-rule { height: 1px; background: #e4e0d8; margin-bottom: 10px; }
+.ed-foot { display: flex; align-items: flex-end; justify-content: space-between; }
+.ed-price-lbl { font-size: 8px; color: #a0a090; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1px; }
+.ed-price { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); }
+.ed-link { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--navy-light); opacity: 0; transition: opacity .2s; }
+.ed-kart:hover .ed-link { opacity: 1; }
+
+/* ══════════════════════════════════════════
+   D — STRIP / NABIZ
+   ══════════════════════════════════════════ */
+#page-d { background: #eef1f5; }
+
+.st-wrap { background: var(--navy); border-radius: 10px; overflow: hidden; box-shadow: 0 16px 60px rgba(13,33,55,.22); }
+.st-top { padding: 18px 28px; border-bottom: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; justify-content: space-between; }
+.st-top-l { display: flex; align-items: center; gap: 14px; }
+.st-pulse { position: relative; width: 10px; height: 10px; flex-shrink: 0; }
+.st-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+.st-pulse::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid var(--amber); animation: pu 1.8s ease-out infinite; opacity: 0; }
+@keyframes pu { 0%{transform:scale(.7);opacity:.7} 100%{transform:scale(2);opacity:0} }
+.st-top-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: #fff; }
+.st-top-r { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; color: rgba(255,255,255,.25); letter-spacing: 1px; }
+
+.st-item { display: grid; grid-template-columns: 70px 38px 1fr auto auto 44px; align-items: center; gap: 16px; padding: 14px 28px; border-bottom: 1px solid rgba(255,255,255,.045); cursor: pointer; position: relative; overflow: hidden; transition: background .12s; }
+.st-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--amber); transform: scaleY(0); transform-origin: center; transition: transform .2s; }
+.st-item:hover { background: rgba(255,255,255,.03); }
+.st-item:hover::before { transform: scaleY(1); }
+.st-item:last-child { border-bottom: none; }
+
+.st-img { width: 70px; height: 50px; background: rgba(255,255,255,.05); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.07); transition: border-color .15s; }
+.st-item:hover .st-img { border-color: rgba(232,160,32,.4); }
+.st-num { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; color: rgba(255,255,255,.06); text-align: right; }
+.st-info {}
+.st-cat { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 3px; }
+.st-name { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; color: #ddeaf8; line-height: 1.2; }
+.st-rozet { display: inline-flex; align-items: center; gap: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+.st-price-col { text-align: right; flex-shrink: 0; }
+.st-price-lbl { font-size: 8px; color: rgba(255,255,255,.22); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1px; }
+.st-price { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: #fff; }
+.st-btn { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.3); font-size: 13px; flex-shrink: 0; transition: all .15s; position: relative; z-index: 1; }
+.st-item:hover .st-btn { border-color: var(--amber); color: var(--amber); background: rgba(232,160,32,.1); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-brand">Tunaylar <span>/ Kampanya Kartı Tasarım Önerileri</span></div>
+  <div class="nav-tab active" onclick="go('a',this)">A — Blueprint</div>
+  <div class="nav-tab" onclick="go('b',this)">B — Vitrin</div>
+  <div class="nav-tab" onclick="go('c',this)">C — Editoryal</div>
+  <div class="nav-tab" onclick="go('d',this)">D — Strip</div>
+</nav>
+
+<!-- ══ A ══ -->
+<div id="page-a" class="page active">
+  <div class="sec-head">
+    <div class="sec-tag">Tasarım A</div>
+    <div class="sec-title" style="color:#b8d0e8">Blueprint — Teknik / Koyu</div>
+    <div class="sec-desc">Lacivert zemin, blueprint grid dokusu, amber köşe çizgileri. Sanayi estetiği — teknik ve otoriter. Hover'da köşe büyür, dot yanar.</div>
+  </div>
+
+  <div class="bp-header">
+    <div class="bp-corner-wrap">
+      <div class="bp-corner"></div>
+      <div class="bp-label">Öne Çıkan Ürünler</div>
+    </div>
+    <div class="bp-count">04 ÜRÜN</div>
+  </div>
+
+  <div class="bp-grid">
+    <div class="bp-kart">
+      <div class="bp-img">⚖️<div class="bp-rozet" style="background:var(--amber);color:var(--navy)">⭐ Çok Satan</div></div>
+      <div class="bp-body">
+        <div class="bp-cat">Taşıt Kantarları</div>
+        <div class="bp-name">TCZ-PLT-3x18 Zemin İçi Tip</div>
+        <div class="bp-foot"><div><div class="bp-price-lbl">Liste Fiyatı</div><div class="bp-price">$ 48.200</div></div><div class="bp-dot"></div></div>
+      </div>
+    </div>
+    <div class="bp-kart">
+      <div class="bp-img">🏗️<div class="bp-rozet" style="background:#e74c3c;color:#fff">🔥 Kampanya</div></div>
+      <div class="bp-body">
+        <div class="bp-cat">Vagon Kantarları</div>
+        <div class="bp-name">VKZ-100 Serisi Vagon Kantarı</div>
+        <div class="bp-foot"><div><div class="bp-price-lbl">Liste Fiyatı</div><div class="bp-price">$ 92.500</div></div><div class="bp-dot"></div></div>
+      </div>
+    </div>
+    <div class="bp-kart">
+      <div class="bp-img">📡<div class="bp-rozet" style="background:#27ae60;color:#fff">🆕 Yeni</div></div>
+      <div class="bp-body">
+        <div class="bp-cat">Yük Hücreleri</div>
+        <div class="bp-name">BM14G Paslanmaz Yük Hücresi</div>
+        <div class="bp-foot"><div><div class="bp-price-lbl">Liste Fiyatı</div><div class="bp-price">€ 1.240</div></div><div class="bp-dot"></div></div>
+      </div>
+    </div>
+    <div class="bp-kart">
+      <div class="bp-img">🖥️<div class="bp-rozet" style="background:#8e44ad;color:#fff">💎 Öne Çıkan</div></div>
+      <div class="bp-body">
+        <div class="bp-cat">Dijital Göstergeler</div>
+        <div class="bp-name">FL Serisi Ağırlık Göstergesi</div>
+        <div class="bp-foot"><div><div class="bp-price-lbl">Liste Fiyatı</div><div class="bp-price">€ 3.800</div></div><div class="bp-dot"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pick-wrap"><button class="pick-btn">Bu tasarımı istiyorum <span class="arr">→</span></button></div>
+</div>
+
+<!-- ══ B ══ -->
+<div id="page-b" class="page">
+  <div class="sec-head">
+    <div class="sec-tag">Tasarım B</div>
+    <div class="sec-title">Vitrin — Fuar Kataloğu</div>
+    <div class="sec-desc">Beyaz kartlar, amber diyagonal başlık, hover'da alt çizgi. Temiz ve kurumsal. Mevcut siteyle en uyumlu seçenek.</div>
+  </div>
+
+  <div class="vt-wrap">
+    <div class="vt-head">
+      <div class="vt-head-amber">
+        <div class="vt-head-icon">⭐</div>
+        <div class="vt-head-title">Öne Çıkan Ürünler</div>
+      </div>
+      <div class="vt-head-right"><div class="vt-hdot"></div><div class="vt-hdot"></div><div class="vt-hdot"></div></div>
+    </div>
+    <div class="vt-grid">
+      <div class="vt-kart">
+        <div class="vt-img">⚖️<div class="vt-rozet" style="background:#e67e22">⭐ Çok Satan</div></div>
+        <div class="vt-body"><div class="vt-cat">Taşıt Kantarları</div><div class="vt-name">TCZ-PLT-3x18 Zemin İçi Tip</div><div class="vt-foot"><div><div class="vt-price-lbl">Liste Fiyatı</div><div class="vt-price">$ 48.200</div></div><div class="vt-arr">→</div></div></div>
+      </div>
+      <div class="vt-kart">
+        <div class="vt-img">🏗️<div class="vt-rozet" style="background:#e74c3c">🔥 Kampanya</div></div>
+        <div class="vt-body"><div class="vt-cat">Vagon Kantarları</div><div class="vt-name">VKZ-100 Serisi Vagon Kantarı</div><div class="vt-foot"><div><div class="vt-price-lbl">Liste Fiyatı</div><div class="vt-price">$ 92.500</div></div><div class="vt-arr">→</div></div></div>
+      </div>
+      <div class="vt-kart">
+        <div class="vt-img">📡<div class="vt-rozet" style="background:#27ae60">🆕 Yeni Ürün</div></div>
+        <div class="vt-body"><div class="vt-cat">Yük Hücreleri</div><div class="vt-name">BM14G Paslanmaz Yük Hücresi</div><div class="vt-foot"><div><div class="vt-price-lbl">Liste Fiyatı</div><div class="vt-price">€ 1.240</div></div><div class="vt-arr">→</div></div></div>
+      </div>
+      <div class="vt-kart">
+        <div class="vt-img">🖥️<div class="vt-rozet" style="background:#8e44ad">💎 Öne Çıkan</div></div>
+        <div class="vt-body"><div class="vt-cat">Dijital Göstergeler</div><div class="vt-name">FL Serisi Ağırlık Göstergesi</div><div class="vt-foot"><div><div class="vt-price-lbl">Liste Fiyatı</div><div class="vt-price">€ 3.800</div></div><div class="vt-arr">→</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pick-wrap"><button class="pick-btn">Bu tasarımı istiyorum <span class="arr">→</span></button></div>
+</div>
+
+<!-- ══ C ══ -->
+<div id="page-c" class="page">
+  <div class="sec-head">
+    <div class="sec-tag">Tasarım C</div>
+    <div class="sec-title">Editoryal — Serif + Masonry</div>
+    <div class="sec-desc">Italic serif başlık, asimetrik grid — sol tarafta büyük hero kart. Teknik katalog ile dergi estetiğinin karışımı.</div>
+  </div>
+
+  <div>
+    <div class="ed-head">
+      <div><div class="ed-kicker">Kampanya &amp; Öne Çıkan</div><div class="ed-big">Seçili Ürünler</div></div>
+      <div class="ed-count">4 ürün listeleniyor</div>
+    </div>
+    <div class="ed-grid">
+      <div class="ed-kart hero">
+        <div class="ed-img">⚖️<div class="ed-rozet" style="background:#e67e22;color:#fff">⭐ Çok Satan</div></div>
+        <div class="ed-body"><div class="ed-cat">Taşıt Kantarları</div><div class="ed-name">TCZ-PLT-3x18 Zemin İçi Tip Taşıt Kantarı</div><div class="ed-rule"></div><div class="ed-foot"><div><div class="ed-price-lbl">Liste Fiyatı</div><div class="ed-price">$ 48.200</div></div><div class="ed-link">İncele →</div></div></div>
+      </div>
+      <div class="ed-kart">
+        <div class="ed-img" style="height:80px;font-size:32px">🏗️<div class="ed-rozet" style="background:#e74c3c;color:#fff;font-size:8px">🔥 Kampanya</div></div>
+        <div class="ed-body"><div class="ed-cat">Vagon Kantarları</div><div class="ed-name" style="font-size:14px">VKZ-100 Serisi Vagon Kantarı</div><div class="ed-rule"></div><div class="ed-foot"><div><div class="ed-price-lbl">Fiyat</div><div class="ed-price" style="font-size:16px">$ 92.500</div></div><div class="ed-link">→</div></div></div>
+      </div>
+      <div class="ed-kart">
+        <div class="ed-img" style="height:80px;font-size:32px">📡<div class="ed-rozet" style="background:#27ae60;color:#fff;font-size:8px">🆕 Yeni</div></div>
+        <div class="ed-body"><div class="ed-cat">Yük Hücreleri</div><div class="ed-name" style="font-size:14px">BM14G Paslanmaz Yük Hücresi</div><div class="ed-rule"></div><div class="ed-foot"><div><div class="ed-price-lbl">Fiyat</div><div class="ed-price" style="font-size:16px">€ 1.240</div></div><div class="ed-link">→</div></div></div>
+      </div>
+      <div class="ed-kart">
+        <div class="ed-img" style="height:80px;font-size:32px">🖥️<div class="ed-rozet" style="background:#8e44ad;color:#fff;font-size:8px">💎 Öne Çıkan</div></div>
+        <div class="ed-body"><div class="ed-cat">Dijital Göstergeler</div><div class="ed-name" style="font-size:14px">FL Serisi Ağırlık Göstergesi</div><div class="ed-rule"></div><div class="ed-foot"><div><div class="ed-price-lbl">Fiyat</div><div class="ed-price" style="font-size:16px">€ 3.800</div></div><div class="ed-link">→</div></div></div>
+      </div>
+      <div class="ed-kart">
+        <div class="ed-img" style="height:80px;font-size:32px">⚙️<div class="ed-rozet" style="background:#e67e22;color:#fff;font-size:8px">⭐ Çok Satan</div></div>
+        <div class="ed-body"><div class="ed-cat">Aks Kantarları</div><div class="ed-name" style="font-size:14px">AXLELINE Sabit Aks Kantarı</div><div class="ed-rule"></div><div class="ed-foot"><div><div class="ed-price-lbl">Fiyat</div><div class="ed-price" style="font-size:16px">$ 24.000</div></div><div class="ed-link">→</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pick-wrap"><button class="pick-btn">Bu tasarımı istiyorum <span class="arr">→</span></button></div>
+</div>
+
+<!-- ══ D ══ -->
+<div id="page-d" class="page">
+  <div class="sec-head">
+    <div class="sec-tag">Tasarım D</div>
+    <div class="sec-title">Strip — Yatay + Nabız</div>
+    <div class="sec-desc">Tam koyu zemin, yatay satır listesi, sol kenarda amber nabız animasyonu. Print'te de çok temiz. Maksimum bilgi yoğunluğu.</div>
+  </div>
+
+  <div class="st-wrap">
+    <div class="st-top">
+      <div class="st-top-l">
+        <div class="st-pulse"><div class="st-dot"></div></div>
+        <div class="st-top-title">Öne Çıkan Ürünler</div>
+      </div>
+      <div class="st-top-r">04 ÜRÜN</div>
+    </div>
+
+    <div class="st-item">
+      <div class="st-img">⚖️</div>
+      <div class="st-num">01</div>
+      <div class="st-info"><div class="st-cat">Taşıt Kantarları</div><div class="st-name">TCZ-PLT-3x18 Zemin İçi Tip Taşıt Kantarı</div></div>
+      <div class="st-rozet" style="background:rgba(232,160,32,.14);color:var(--amber)">⭐ Çok Satan</div>
+      <div class="st-price-col"><div class="st-price-lbl">Liste Fiyatı</div><div class="st-price">$ 48.200</div></div>
+      <div class="st-btn">→</div>
+    </div>
+    <div class="st-item">
+      <div class="st-img">🏗️</div>
+      <div class="st-num">02</div>
+      <div class="st-info"><div class="st-cat">Vagon Kantarları</div><div class="st-name">VKZ-100 Serisi Vagon Kantarı</div></div>
+      <div class="st-rozet" style="background:rgba(231,76,60,.14);color:#e74c3c">🔥 Kampanya</div>
+      <div class="st-price-col"><div class="st-price-lbl">Liste Fiyatı</div><div class="st-price">$ 92.500</div></div>
+      <div class="st-btn">→</div>
+    </div>
+    <div class="st-item">
+      <div class="st-img">📡</div>
+      <div class="st-num">03</div>
+      <div class="st-info"><div class="st-cat">Yük Hücreleri</div><div class="st-name">BM14G Paslanmaz Çelik Yük Hücresi</div></div>
+      <div class="st-rozet" style="background:rgba(39,174,96,.14);color:#27ae60">🆕 Yeni Ürün</div>
+      <div class="st-price-col"><div class="st-price-lbl">Liste Fiyatı</div><div class="st-price">€ 1.240</div></div>
+      <div class="st-btn">→</div>
+    </div>
+    <div class="st-item">
+      <div class="st-img">🖥️</div>
+      <div class="st-num">04</div>
+      <div class="st-info"><div class="st-cat">Dijital Göstergeler</div><div class="st-name">FL Serisi Ağırlık Göstergesi</div></div>
+      <div class="st-rozet" style="background:rgba(142,68,173,.14);color:#8e44ad">💎 Öne Çıkan</div>
+      <div class="st-price-col"><div class="st-price-lbl">Liste Fiyatı</div><div class="st-price">€ 3.800</div></div>
+      <div class="st-btn">→</div>
+    </div>
+  </div>
+  <div class="pick-wrap"><button class="pick-btn">Bu tasarımı istiyorum <span class="arr">→</span></button></div>
+</div>
+
+<script>
+function go(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>

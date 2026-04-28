@@ -1,0 +1,789 @@
+/* ============================================================
+   TUNAYLAR FİYAT LİSTESİ — print.css  v2
+   PDF / Yazıcı çıktısı — float tabanlı yapıya tam uyumlu
+   
+   KULLANIM: Ctrl+P → "Arka Plan Grafikleri Yazdır" aktif edin
+   ============================================================ */
+
+   
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@400;500;600;700;800&display=swap');
+
+   /* ── Değişkenler (screen.css ile senkron tutun) ── */
+   :root {
+     --clr-primary:       #0d2137;
+     --clr-primary-mid:   #163556;
+     --clr-primary-light: #1e4a77;
+     --clr-accent:        #e8a020;
+     --clr-accent-light:  #f5c355;
+     --clr-border:        #c8d4e0;
+     --clr-border-light:  #e4eaf0;
+     --clr-text:          #0d1f2d;
+     --clr-text-mid:      #3a5068;
+     --clr-text-muted:    #6b8299;
+     --font-head: 'Inter Tight', 'Arial Narrow', sans-serif;
+     --font-body: 'Inter', Arial, sans-serif;
+     /* Print sütun genişlikleri — A4 landscape için optimize */
+     --col-model:   200px;
+     --col-olcu:     80px;
+     --col-kap:      70px;
+     --col-maliyet:  90px;
+     --col-liste:   105px;
+     --col-tavsiye:  95px;
+     --col-son:      95px;
+     /* aciklama1: olcu yok, kap var  → --col-olcu yerine geçer */
+     --col-aciklama1: 130px;
+     /* aciklama2: olcu yok, kap yok → --col-olcu + --col-kap yerine geçer */
+     --col-aciklama2: 200px;
+   }
+   
+   /* ============================================================
+      SAYFA BOYUTU
+      ============================================================ */
+   
+   /*   @page {
+     size: A4 landscape;
+     margin: 10mm 12mm 12mm 12mm;
+   }
+   */
+    /*Portrait tercih ederseniz:*/
+   @page { size: A4 portrait; margin: 10mm 10mm 10mm 10mm; }
+     @page :first {
+     }
+     /* Kapak sayfası tam A4s (297mm) — @page:first margin:0 ile
+        fixed footer kapak sayfasının dışında kalır, görünmez     */
+   
+   
+   @media print {
+   
+     /* ── HEADER — her sayfada üstte ── */
+     #print_header {
+       display: none !important;
+       position: fixed;
+       top: 0;
+       bottom: 280mm;
+       left: 0;
+       right: 0;
+       height: 12mm;
+       align-items: center;
+       justify-content: space-between;
+       padding: 0 8mm;
+       background: var(--clr-primary) !important;
+       border-bottom: 2pt solid var(--clr-accent);
+       -webkit-print-color-adjust: exact;
+       print-color-adjust: exact;
+       z-index: 1000;
+     }
+   
+     #print_header .header_title {
+       font-size: 9pt;
+       font-weight: 700;
+       letter-spacing: 2px;
+       text-transform: uppercase;
+       color: var(--clr-accent-light) !important;
+     }
+   
+     #print_header .header_firma {
+       font-size: 7pt;
+       color: rgba(255,255,255,.5) !important;
+     }
+   
+     /* ── FOOTER — her sayfada altta ── */
+     #print_footer {
+       display: flex !important;
+       position: fixed;
+       bottom: 0;
+       top: 270mm;
+       left: 0;
+       right: 0;
+       height: 10mm;
+       align-items: center;
+       justify-content: space-between;
+       padding: 0 8mm;
+       border-top: 0.5pt solid var(--clr-border);
+       font-family: var(--font-head);
+       font-size: 7.5pt;
+       color: var(--clr-text-muted) !important;
+       background: #fff !important;
+       -webkit-print-color-adjust: exact;
+       print-color-adjust: exact;
+       z-index: 1000;
+     }
+    
+   
+     #print_footer .footer_firma {
+       font-size: 7pt;
+       color: var(--clr-text-muted) !important;
+     }
+   
+     #print_footer .pageNumber::after {
+       /*content: counter(page);*/
+     }
+   
+     .iceridekiler_sayfasi {
+       display: block;
+       page-break-after: always;
+       break-after: page;
+     }
+   
+     .iceridekiler_body {
+       padding: 14mm 8mm;
+     }
+   
+     .iceridekiler_body h1 {
+       font-family: var(--font-head);
+       font-size: 11pt;
+       font-weight: 800;
+       letter-spacing: 3px;
+       text-transform: uppercase;
+       color: var(--clr-accent);
+       margin-bottom: 10pt;
+       padding-bottom: 5pt;
+       border-bottom: 1pt solid var(--clr-border);
+     }
+   
+     .toc_grup_baslik {
+       display: flex;
+       align-items: baseline;
+       margin-top: 8pt;
+       margin-bottom: 3pt;
+       font-family: var(--font-head);
+       font-size: 10pt;
+       font-weight: 700;
+       color: var(--clr-primary);
+       text-transform: uppercase;
+       letter-spacing: 1px;
+       /*border-bottom: 0.5pt solid var(--clr-border-light);*/
+       padding-bottom: 2pt;
+     }
+   
+     .toc_urun {
+       display: none;
+       align-items: baseline;
+       margin-bottom: 12pt;
+       padding-left: 16pt;
+       font-family: var(--font-body);
+       font-size: 8.5pt;
+       color: var(--clr-text-mid);
+     }
+   
+     .toc_no {
+       width: 20pt;
+       flex-shrink: 0;
+       color: var(--clr-accent);
+       font-weight: 700;
+     }
+   
+     .toc_tire {
+       width: 12pt;
+       flex-shrink: 0;
+       color: var(--clr-accent);
+     }
+   
+     .toc_ad {
+       flex-shrink: 0;
+       max-width: 130mm;
+     }
+   
+     .toc_nokta {
+       flex: 1;
+       border-bottom: 1pt dotted var(--clr-border);
+       margin: 0 4pt 3pt 4pt;
+     }
+   
+     .toc_sayfa {
+       width: 20pt;
+       text-align: right;
+       font-size: 8pt;
+       color: var(--clr-text-muted);
+     }
+   
+   
+
+/* ============================================================
+      KAMPANYA / ÖNE ÇIKAN ÜRÜNLER — PRINT KARTLARI
+      ============================================================ */
+
+   #kampanya_bolge {
+     display: block !important;
+     page-break-after: always;
+     break-after: page;
+     margin: 0 0 0 0 !important;
+     padding: 0 !important;
+   }
+
+   .kamp_baslik_satir {
+     display: none !important;
+     background: #0d2137 !important;
+     -webkit-print-color-adjust: exact;
+     print-color-adjust: exact;
+     border-left: 5pt solid #e8a020 !important;
+     padding: 10pt 14pt !important;
+     margin-bottom: 10pt !important;
+     border-radius: 0 !important;
+   }
+
+   .kamp_baslik_h2 {
+     color: #ffffff !important;
+     font-size: 14pt !important;
+     -webkit-print-color-adjust: exact;
+     print-color-adjust: exact;
+   }
+
+   .kamp_baslik_alt {
+     color: rgba(255,255,255,0.7) !important;
+     -webkit-print-color-adjust: exact;
+     print-color-adjust: exact;
+   }
+
+   .kamp_pulse_dot { display: none !important; }
+
+   .kamp_grid {
+     display: grid !important;
+     grid-template-columns: repeat(2, minmax(250px, 1fr)) !important;
+     gap: 30pt !important;
+     padding: 0 !important;
+     background: transparent !important;
+     border: none !important;
+  
+   }
+
+   .kamp_kart {
+     display: flex !important;
+     flex-direction: column !important;
+     border: 1pt solid #c0c8d4 !important;
+     border-radius: 10pt !important;
+     overflow: hidden !important;
+     break-inside: avoid !important;
+     page-break-inside: avoid !important;
+     box-shadow: none !important;
+     background: #fff !important;
+   }
+
+   .kamp_img_wrap {
+    width: 100%;
+     height: 100%;
+     display: flex !important;
+     align-items: center !important;
+     justify-content: center !important;
+     background: #f8f9fb !important;
+     -webkit-print-color-adjust: exact;
+     print-color-adjust: exact;
+   }
+
+   .kamp_img {
+     max-width: 100%;
+     max-height: 100%;
+     object-fit: contain !important;
+   }
+
+   .kamp_no_img { display: none !important; }
+
+   .kamp_kart_ic {
+     padding: 6pt 8pt 8pt !important;
+   }
+
+   .kamp_katadi {
+     font-size: 7pt !important;
+     color: #1e4a77 !important;
+     -webkit-print-color-adjust: exact;
+     print-color-adjust: exact;
+   }
+
+   .kamp_urunadi {
+     font-size: 9pt !important;
+     color: #0d2137 !important;
+     margin-bottom: 4pt !important;
+   }
+
+   .kamp_fiyat_label {
+     font-size: 7pt !important;
+     color: #888 !important;
+   }
+
+   .kamp_fiyat {
+     font-size: 12pt !important;
+     font-weight: 700 !important;
+     color: #0d2137 !important;
+   }
+
+   .kamp_btn { display: none !important; }
+
+   .kamp_rozet {
+     position: absolute !important;
+     display: none;
+     top: 5pt !important;
+     left: 5pt !important;
+     font-size: 7pt !important;
+     padding: 2pt 6pt !important;
+     -webkit-print-color-adjust: exact !important;
+     print-color-adjust: exact !important;
+   }
+
+}
+   
+   
+   *, *::before, *::after { box-sizing: border-box; }
+   
+   html, body {
+     width: 100%;
+     font-family: var(--font-body);
+     font-size: 10px;
+     line-height: 1.4;
+     color: var(--clr-text);
+     background: #fff;
+     -webkit-print-color-adjust: exact !important;
+     print-color-adjust: exact !important;
+   }
+   
+   /* ============================================================
+      EKRANA ÖZGÜ — PRINT'TE GİZLE
+      ============================================================ */
+   #top_div,
+   #main_container,
+   #menu_div,
+   #extra_div_main_container,
+   #extra_div_container,
+   .extra_div_open,
+   #main_cat_select,
+   #load_select_result,
+   #kapasite_select_result,
+   #detaylar,
+   #yardim,
+   #guncelle_container,
+   #aciklama_container,
+   #my_video,
+   #my_video_container,
+   #my_video_close,
+   #aactive_id,
+   #temporary_div,
+   #filter_bar,
+   .filter_group,
+   .filter_label,
+   .main_menu,
+   .hidden_element,
+   a[onclick*="print"],
+   i.fa-eye-slash,
+   i.fa-print,
+   .my_hidden_div {
+     display: none !important;
+   }
+   
+   /* ============================================================
+      KAPAK SAYFASI — print'te göster, tam sayfa
+      ============================================================ */
+   #kapak_sayfasi {
+     display: flex !important;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     height: 260mm;         /* tam A4 yüksekliği — fixed elementlerin referansı hizalanır */
+     background: var(--clr-primary) !important;
+     color: #fff;
+     text-align: center;
+     page-break-after: always;
+     break-after: page;
+     position: relative;
+     padding: 20mm 20mm;
+   }
+   
+   /* Alt altın şerit */
+   #kapak_sayfasi::after {
+     content: '';
+     position: absolute;
+     bottom: 0; left: 0; right: 0;
+     height: 5px;
+     background: var(--clr-accent);
+   }
+   
+   /* Firma altbilgisi */
+   #kapak_sayfasi::before {
+     content: 'TUNAYLAR BASKÜL SANAYİ VE TİCARET A.Ş.  ·  www.tunaylar.com';
+     position: absolute;
+     bottom: 14px;
+     font-family: var(--font-head);
+     font-size: 7pt;
+     letter-spacing: 2px;
+     color: rgba(255,255,255,.4);
+   }
+   
+   #kapak_sayfasi h1#list_type {
+     font-family: var(--font-head);
+     font-size: 28pt;
+     font-weight: 800;
+     letter-spacing: 5px;
+     text-transform: uppercase;
+     color: #ffffff;
+     margin-bottom: 14px;
+   }
+   
+   #kapak_sayfasi h2 {
+     font-family: var(--font-head);
+     font-size: 42pt;
+     font-weight: 700;
+     color: var(--clr-accent-light);
+     letter-spacing: 2px;
+     line-height: 1.1;
+   }
+   
+   #kapak_sayfasi h2 span { color: rgba(255,255,255,.5); }
+   
+   /* ============================================================
+      AÇIKLAMA SAYFASI — print'te göster, tam sayfa
+      ============================================================ */
+   .aciklama_sayfasi {
+     page-break-after: always;
+     break-after: page;
+   }
+   
+   .aciklama_body {
+     padding: 14mm 8mm;
+   }
+   
+   .aciklama_body h1 {
+     font-family: var(--font-head);
+     font-size: 11pt;
+     font-weight: 800;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     color: var(--clr-accent);
+     margin-bottom: 10pt;
+     padding-bottom: 5pt;
+     border-bottom: 1pt solid var(--clr-border);
+   }
+   
+   .aciklama_body h2 {
+     font-family: var(--font-head);
+     font-size: 11pt;
+     font-weight: 700;
+     letter-spacing: 2.5px;
+     text-transform: uppercase;
+     color: var(--clr-primary);
+     margin-top: 10pt;
+     margin-bottom: 4pt;
+     padding-left: 7pt;
+     border-left: 2.5pt solid var(--clr-accent);
+   }
+   
+   .aciklama_body p {
+     font-size: 10pt;
+     line-height: 1.7;
+     color: var(--clr-text-mid);
+     margin-bottom: 3pt;
+   }
+   
+   .aciklama_body strong { color: var(--clr-text); font-weight: 600; }
+   
+   /* ============================================================
+      LAYOUT RESET — print'te sidebar yok, tek sütun
+      ============================================================ */
+   #body_div_container,
+   #body_div,
+   #body_text {
+     display: block !important;
+     float: none !important;
+     width: 100% !important;
+     margin: 0 !important;
+     padding: 0 !important;
+     border: none !important;
+     box-shadow: none !important;
+     overflow: visible !important;
+   }
+   
+   /* admin_menu_div sidebar — print'te gizle */
+   #admin_menu_div { display: none !important; }
+   
+   /* ============================================================
+      KATEGORİ BAŞLIĞI
+      ============================================================ */
+      .anakat_adi1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        flex-direction:column;   /* ALT ALTA */
+        align-items:center;      /* ORTALA */
+      
+        background-color: var(--clr-primary) !important;
+        background-image: var(--cover-image);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 62% auto;
+      
+        min-height: calc(297mm - 20mm);
+        width: 100%;
+      
+        color: #ffffff !important;
+        font-family: var(--font-head);
+        font-size: 24pt;
+        font-weight: 800;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      
+        padding: 20mm;
+        margin: 0;
+        border-left: 6pt solid var(--clr-accent);
+      
+        page-break-before: always;
+        break-before: page;
+        page-break-after: always;
+        break-after: page;
+      
+        clear: both;
+        position: relative;
+      }
+
+      .anakat_adi1 img{
+        width:400px;
+        /*border: 2px solid var(--clr-accent);*/
+        margin-top:300px;
+        margin-bottom:10px;
+        border-radius:10px;
+
+    }
+
+   .anakat_adi1 i { display: none !important; }
+   
+   .seperator { height: 0; border: none; margin: 0; clear: both; }
+   
+   /* ============================================================
+      ÜRÜN GRUBU BAŞLIĞI
+      ============================================================ */
+   .cizim_adi {
+     background: var(--clr-primary-mid) !important;
+     color: #ffffff !important;
+     font-family: var(--font-head);
+     font-size: 8pt;
+     font-weight: 700;
+     letter-spacing: 1.8px;
+     text-transform: uppercase;
+     padding: 4pt 7pt;
+     page-break-after: avoid;
+     break-after: avoid;
+     clear: both;
+     border-left: 4px solid #37c2e4;
+   }
+   .cizim_adi i { display: none !important; }
+   
+   .cizim_bosluk,
+   .cizim_bosluk_ufak { display: none !important; }
+   
+   /* ============================================================
+      ÜRÜN BLOĞU — left + fiyat_title + right
+      ============================================================ */
+   
+   /* Sol panel */
+   .left_container {
+     float: left !important;
+     width: 28% !important;
+     padding: 6pt !important;
+     background: #fff;
+     border-right: 0.5pt solid var(--clr-border);
+     page-break-inside: avoid;
+     break-inside: avoid;
+     overflow: visible !important;
+   }
+   .left_container > i { display: none !important; }
+   
+   .fiyat_img { text-align: center; margin-bottom: 5pt; }
+   .fiyat_img img { max-width: 100%; max-height: 70pt; object-fit: contain; }
+   
+   .fiyat_aciklama {
+     font-size: 7pt;
+     line-height: 1.5;
+     color: var(--clr-text-mid);
+     margin-bottom: 4pt;
+   }
+   .fiyat_aciklama h1 {
+     font-family: var(--font-head);
+     font-size: 6pt;
+     font-weight: 700;
+     letter-spacing: 1.5px;
+     text-transform: uppercase;
+     color: var(--clr-primary);
+     margin-bottom: 3pt;
+     border-bottom: 0.5pt solid var(--clr-border-light);
+     padding-bottom: 2pt;
+   }
+   .fiyat_aciklama ul { list-style: none; padding: 0; }
+   .fiyat_aciklama ul li {
+     padding-left: 7pt;
+     position: relative;
+     font-size: 6.5pt;
+   }
+   .fiyat_aciklama ul li::before {
+     content: '—'; position: absolute; left: 0; color: var(--clr-accent);
+   }
+   
+   .fiyat_aciklama dt {
+    float: left;
+
+   }
+   
+
+   /* Başlık satırı */
+   .fiyat_title_container {
+     float: right !important;
+     width: 72% !important;
+     display: flex !important;
+     background: var(--clr-primary-light) !important;
+     page-break-inside: avoid;
+     break-inside: avoid;
+   }
+   
+   .fiyat_title_container > div {
+     float: none !important;
+     /*display: flex !important;*/
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-family: var(--font-head);
+     font-size: 6.5pt;
+     font-weight: 700;
+     letter-spacing: 1.5px;
+     text-transform: uppercase;
+     color: rgba(255,255,255,.8) !important;
+     padding: 4pt 3pt;
+     border-right: 0.5pt solid rgba(255,255,255,.12);
+     background: transparent !important;
+   }
+   .fiyat_title_container .model_kodu  { width: var(--col-model); justify-content: flex-start; padding-left: 6pt; }
+   .fiyat_title_container .olculer     { width: var(--col-olcu); }
+   .fiyat_title_container .olculer2    { width: var(--col-olcu); }
+   .fiyat_title_container .aciklama1   { width: var(--col-aciklama1); flex: none; justify-content: flex-start; padding-left: 4pt; }
+   .fiyat_title_container .aciklama2   { width: var(--col-aciklama2); flex: none; justify-content: flex-start; padding-left: 4pt; }
+   .fiyat_title_container .kapasite    { width: var(--col-kap); }
+   .fiyat_title_container .fiyat_maliyet { width: var(--col-maliyet); }
+   .fiyat_title_container .fiyat_liste { width: var(--col-liste); color: rgba(255,255,255,.95) !important; }
+   .fiyat_title_container .fiyat_tavsiye { width: var(--col-tavsiye); }
+   .fiyat_title_container .fiyat_son   { width: var(--col-son); border-right: none; }
+   
+   /* Ürün satırları */
+   .right_container {
+     float: right !important;
+     width: 72% !important;
+     background: #fff;
+     overflow: visible !important;
+   }
+   
+   .line_container {
+     display: flex !important;
+     align-items: stretch;
+     border-bottom: 0.5pt solid var(--clr-border-light);
+     page-break-inside: avoid;
+     break-inside: avoid;
+     overflow: visible !important;
+   }
+   
+   /* Zebra */
+   .line_container:nth-child(even) { background: #f5f8fc !important; }
+   
+   .line_container > div {
+     float: none !important;
+     /*display: flex !important;*/
+     display: flex ;
+     align-items: center;
+     padding: 3.5pt 3pt;
+     font-size: 7pt;
+     border-right: 0.5pt solid var(--clr-border-light);
+     overflow: hidden;
+     white-space: nowrap;
+   }
+   .line_container > div:last-child { border-right: none; }
+   
+   .line_container .model_kodu {
+     width: var(--col-model);
+     font-family: var(--font-head);
+     font-weight: 700;
+     color: var(--clr-primary) !important;
+     padding-left: 6pt;
+   }
+   .line_container .olculer,
+   .line_container .olculer2 {
+     width: var(--col-olcu);
+     justify-content: center;
+     color: var(--clr-text-mid);
+   }
+   .line_container .kapasite {
+     width: var(--col-kap);
+     justify-content: center;
+     color: var(--clr-text-mid);
+   }
+   .line_container .fiyat_maliyet {
+     width: var(--col-maliyet);
+     justify-content: flex-end;
+   /*  color: var(--clr-text-mid) !important;*/
+    padding-right: 5pt;
+
+     color: var(--clr-text-mid);
+     font-weight: 500;
+   }
+   .line_container .fiyat_liste {
+     width: var(--col-liste);
+     justify-content: flex-end;
+     padding-right: 5pt;
+    /* color: var(--clr-primary) !important;*/   
+     color: var(--clr-primary);
+     font-weight: 700;
+   }
+   .line_container .fiyat_tavsiye {
+     width: var(--col-tavsiye);
+     justify-content: flex-end;
+    /* color: #1e6e4a !important;*/   
+     color: #1e6e4a;
+     font-weight: 600;
+     padding-right: 5pt;
+
+   }
+   .line_container .fiyat_son {
+     width: var(--col-son);
+     justify-content: flex-end;
+    /* color: #b83030 !important;*/
+     color: #b83030;
+     font-weight: 700;
+     border-right: none;
+     padding-right: 5pt;
+
+   }
+   .line_container .aciklama1,
+   .line_container .aciklama2 {
+     flex: none;
+     color: var(--clr-text-mid);
+     white-space: normal;
+   }
+   .line_container .aciklama1 { width: var(--col-aciklama1); }
+   .line_container .aciklama2 { width: var(--col-aciklama2); }
+   
+   
+   
+   
+   /* Kar marjları — print'te gizle */
+   .line_container .kar_marjlari {
+    font-family: var(--fhead);
+    font-size: 4pt;
+    color: var(--text-muted);
+    margin-left: 3px;
+    opacity: .6;
+  }
+   
+   
+   .kar_marjlari { display: block !important; }
+   
+
+
+   /* ============================================================
+      CLEARFIX — float blokların altına geçiş
+      ============================================================ */
+   .left_container + .fiyat_title_container + .right_container::after,
+   .right_container::after {
+     content: '';
+     display: table;
+     clear: both;
+   }
+   
+   /* ============================================================
+      GENEL TEMİZLİK
+      ============================================================ */
+   * { box-shadow: none !important; }
+   a { color: inherit !important; text-decoration: none !important; }
