@@ -223,6 +223,131 @@
    
    .nav_spacer { flex: 1; }
    
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV DROPDOWN
+   ═══════════════════════════════════════════════════════════════ */
+   .nav_dropdown { position: relative; }
+
+   .nav_dropdown_btn {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     height: 36px;
+     padding: 0 14px;
+     border-radius: var(--r4);
+     font-family: var(--fhead);
+     font-size: 11px;
+     font-weight: 600;
+     letter-spacing: 1.8px;
+     text-transform: uppercase;
+     color: rgba(255,255,255,.48);
+     white-space: nowrap;
+     background: none;
+     border: none;
+     cursor: pointer;
+     transition: color .18s, background .18s;
+   }
+   .nav_dropdown_btn i { font-size: 12px; opacity: .7; }
+   .nav_dropdown_btn:hover,
+   .nav_dropdown.open .nav_dropdown_btn {
+     color: var(--amber-light);
+     background: rgba(255,255,255,.07);
+   }
+   
+   .nav_dd_arrow {
+     font-size: 9px !important;
+     opacity: .5;
+     transition: transform .2s;
+   }
+   .nav_dropdown.open .nav_dd_arrow { transform: rotate(180deg); }
+   
+   .nav_dropdown_menu {
+     display: none;
+     position: absolute;
+     top: calc(100% + 6px);
+     left: 0;
+     min-width: 200px;
+     background: var(--navy);
+     border: 1px solid rgba(255,255,255,.1);
+     border-top: 2px solid var(--amber);
+     border-radius: 0 0 var(--r8) var(--r8);
+     box-shadow: 0 8px 28px rgba(0,0,0,.35);
+     z-index: 500;
+     overflow: hidden;
+   }
+   .nav_dropdown.open .nav_dropdown_menu {
+     display: block;
+     animation: ddFadeIn .15s ease;
+   }
+   @keyframes ddFadeIn {
+     from { opacity: 0; transform: translateY(-4px); }
+     to   { opacity: 1; transform: translateY(0); }
+   }
+   
+   .nav_dd_item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    font-family: var(--fhead);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    transition: background .15s, color .15s;
+  }
+  .nav_dd_item:last-child { border-bottom: none; }
+  .nav_dd_item i {
+    font-size: 13px;
+    opacity: .6;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .nav_dd_item:hover {
+    background: rgba(232,160,32,.12);
+    color: var(--amber-light);
+  }
+  .nav_dd_item:hover i { opacity: 1; }
+
+  /* Aktif (seçili) dropdown item */
+  .nav_dd_item.nav_dd_active {
+    background: rgba(232,160,32,.18);
+    color: var(--amber-light);
+    border-left: 2px solid var(--amber);
+  }
+  .nav_dd_item.nav_dd_active i { opacity: 1; color: var(--amber); }
+   
+/* Aktif dropdown item */
+.nav_dd_item.nav_dd_active {
+  background: rgba(232,160,32,.15);
+  color: var(--amber-light) !important;
+  border-left: 2px solid var(--amber);
+}
+.nav_dd_item.nav_dd_active i { opacity: 1; color: var(--amber); }
+
+   /* Ayarlar paneli — geniş dropdown */
+   .nav_settings_panel {
+     min-width: 640px;
+     overflow: visible;
+     background: var(--surface) !important;
+   }
+   .nav_settings_panel .settings_grid { background: var(--surface); }
+   .nav_settings_panel .settings_section {
+     background: var(--surface);
+     border-right: 1px solid var(--border-light);
+     padding: 16px 20px;
+   }
+   .nav_settings_panel .settings_section:last-child { border-right: none; }
+   .nav_settings_panel .settings_section_title { color: var(--amber); }
+   .nav_settings_panel .settings_radio_row,
+   .nav_settings_panel .settings_field_row { color: var(--text-mid); }
+   .nav_settings_panel select,
+   .nav_settings_panel label.settings_field_row input { background: var(--bg); }
+
    /* ── Kullanıcı alanı ── */
    #top_user { display: flex; align-items: center; }
    
@@ -439,15 +564,7 @@
    
    /* ── Sidebar ── */
    #admin_menu_div {
-     float: left;
-     width: var(--sidebar);
-     min-height: 700px;
-     background: var(--surface);
-     border-right: 1px solid var(--border);
-     padding: 20px 0 40px;
-     box-shadow: var(--sh);
-     /* Semantic nav, ama ASP içinde div olarak kalabilir */
-     display: block;
+    display: none !important;
    }
    
    /* Sidebar linkleri — <a> olarak yazıldı */
@@ -493,12 +610,11 @@
    
    /* ── Ana içerik ── */
    #body_text {
-     margin-left: var(--sidebar);
-     padding: 28px 32px 56px;
-     min-height: 700px;
-     overflow: hidden;
-   }
-   
+    margin-left: 0;
+    padding: 28px 32px 56px;
+    min-height: 700px;
+    overflow: hidden;
+  }
    /* ═══════════════════════════════════════════════════════════════
       FİLTRE BAR
       ═══════════════════════════════════════════════════════════════ */

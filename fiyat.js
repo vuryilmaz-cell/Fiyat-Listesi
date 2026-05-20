@@ -1174,8 +1174,17 @@ function yukle()
   					//document.getElementById("selected_title").innerHTML=selected_target.parentNode.innerHTML;
 				//}
 			
-				adjust_list("list_adjustment");
-			}
+				// YENİ  
+				var checked = document.getElementById("fiyat_liste");
+				if (checked && checked.checked) {
+					adjust_liste("fiyat_liste");
+				} else if (document.getElementById("maliyet_liste") && document.getElementById("maliyet_liste").checked) {
+					adjust_liste("maliyet_liste");
+				} else if (document.getElementById("kirilim_liste") && document.getElementById("kirilim_liste").checked) {
+					adjust_liste("kirilim_liste");
+				} else {
+					adjust_liste("fiyat_liste"); // varsayılan
+				}			}
 			if(xmlHttp.status == 302)
 			{
 				
