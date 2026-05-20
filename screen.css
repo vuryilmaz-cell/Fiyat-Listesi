@@ -732,8 +732,9 @@
    .cizim_adi i.fa-eye-slash:hover,
    .cizim_adi i.fa-eye:hover { opacity: .85; }
    
-   .cizim_bosluk      { clear: both; height: 20px; background: var(--border); }
-   .cizim_bosluk_ufak { clear: both; height: 1px; background: var(--border-light); }
+   .cizim_bosluk      { float:left; height: 20px; width: calc(100%); background: var(--border-light);}
+   .cizim_bosluk_ufak { float:left; height: 1px; width: calc(100%); background: var(--border);}
+
 
    .cizim_bosluk > i.fa-eye-slash,
    .cizim_bosluk > i.fa-eye,
@@ -809,7 +810,7 @@
      float: right;
      width: 80%;
      display: flex;
-     background: var(--navy-light);
+     background: var(--surface);
      position: relative;
      box-sizing: border-box;
    }
@@ -819,7 +820,6 @@
      float: left;
      padding-left: 5px;
      font-size: 10px !important;
-     color: rgba(255,255,255,.35);
      cursor: pointer;
      opacity: .4;
      transition: opacity .18s;
@@ -828,33 +828,34 @@
 
    }
 
+  
+
 
 
    .fiyat_title_container > i.fa-eye-slash:hover,
    .fiyat_title_container > i.fa-eye:hover { opacity: 1; }
    .fiyat_title_container > div {
-     float: none !important;
-     display: flex ;
+     float:left;
+     text-align: center;
      align-items: center;
      justify-content: center;
      font-family: var(--fhead);
-     font-size: 9px;
+     font-size: 12px;
      font-weight: 700;
      letter-spacing: 1.8px;
      text-transform: uppercase;
-     color: rgba(255,255,255,.65);
      padding: 7px 5px;
-     border-right: 1px solid rgba(255,255,255,.1);
+     border-right: 1px solid var(--border-light);
    }
    .fiyat_title_container > div:last-child { border-right: none; }
-   .fiyat_title_container .model_kodu    { width: var(--c-model);  justify-content: flex-start; padding-left: 12px;}
+   .fiyat_title_container .model_kodu    { width: var(--c-model);  justify-content:flex-start; padding-left: 12px;}
    .fiyat_title_container .olculer       { width: var(--c-olcu); }
    .fiyat_title_container .olculer2      { width: var(--c-olcu); }
    .fiyat_title_container .aciklama1     { flex: 1; justify-content: flex-start; padding-left: 10px; }
    .fiyat_title_container .aciklama2     { flex: 1; justify-content: flex-start; padding-left: 10px; }
    .fiyat_title_container .kapasite      { width: var(--c-kap); }
    .fiyat_title_container .fiyat_maliyet { width: var(--c-mal); }
-   .fiyat_title_container .fiyat_liste   { width: var(--c-liste); color: rgba(255,255,255,.92); }
+   .fiyat_title_container .fiyat_liste   { width: var(--c-liste); }
    .fiyat_title_container .fiyat_tavsiye { width: var(--c-tav); }
    .fiyat_title_container .fiyat_son     { width: var(--c-son); border-right: none; }
    
@@ -862,33 +863,49 @@
    .right_container {
      float: right;
      width: 80%;
-     background: var(--surface);
      overflow: hidden;
    }
    
+   .right_container > i.fa-eye-slash,
+   .right_container > i.fa-eye {
+     float: left;
+     width: 18px ;
+     padding-left: 5px;
+     font-size: 10px !important;
+     cursor: pointer;
+     opacity: .4;
+     transition: opacity .18s;
+     z-index: 1;
+     line-height: 52px;
+
+   }
+
+
    .line_container {
      display: flex;
-     align-items: stretch;
+     width: calc(100%);
      border-bottom: 1px solid var(--border-light);
      transition: background .13s;
+ 
    }
    .line_container:last-child { border-bottom: none; }
    .line_container:hover { background: #f3f7fb; }
-   .line_container:nth-child(even) { background: #f8fafc; }
-   .line_container:nth-child(even):hover { background: #edf2f8; }
+
    
    .line_container > div {
      display: flex;
-     float: none !important;
-
+     text-align: center;
      align-items: center;
-     padding: 7px 5px;
-     border-right: 1px solid var(--border-light);
      font-size: 13px;
      overflow: hidden;
      white-space: nowrap;
-     float: none !important;
+     padding-top: 5px;
+     padding-bottom: 5px;
+
+     border-right: 1px solid var(--border-light);
+
    }
+
 
 
    .line_container > div:last-child { border-right: none; }
@@ -939,6 +956,7 @@
      color: var(--text-mid);
      font-size: 11px;
      white-space: normal;
+     padding-left: 50px;
    }
    
    .kar_marjlari {

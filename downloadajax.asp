@@ -602,9 +602,9 @@ While ((Repeat1__numRows <> 0) AND (NOT drawing.EOF))
 	<% if anakat_flag = 0 then %>
     
   
-        <div class="anakat_adi1"><div><i class="fa fa-eye-slash" onClick="printed_elements(this)"></i><%if (language <> 2) then Response.Write(drawing.Fields.Item("anakatadi").Value) else Response.Write(drawing.Fields.Item("anakatadi_eng").Value) end if%></div><div><img src="<% =(drawing.Fields.Item("anakat_img").Value) %>"></div></div>
+        <div class="anakat_adi1"><div><%if (language <> 2) then Response.Write(drawing.Fields.Item("anakatadi").Value) else Response.Write(drawing.Fields.Item("anakatadi_eng").Value) end if%></div><div><img src="<% =(drawing.Fields.Item("anakat_img").Value) %>"></div></div>
     <% else %>
-       <div class="anakat_adi1"><div><i class="fa fa-eye-slash" onClick="printed_elements(this)"></i><%if (language <> 2) then Response.Write(drawing.Fields.Item("anakatadi").Value) else Response.Write(drawing.Fields.Item("anakatadi_eng").Value) end if%></div><div><img src="<% =(drawing.Fields.Item("anakat_img").Value) %>"></div></div>
+       <div class="anakat_adi1"><div><%if (language <> 2) then Response.Write(drawing.Fields.Item("anakatadi").Value) else Response.Write(drawing.Fields.Item("anakatadi_eng").Value) end if%></div><div><img src="<% =(drawing.Fields.Item("anakat_img").Value) %>"></div></div>
     <% end if %>
 	
     <% anakat_flag = 1 %>
@@ -624,7 +624,7 @@ While ((Repeat1__numRows <> 0) AND (NOT drawing.EOF))
  <% seperator_flag = 1 %>
 
 
- 	<div class="cizim_adi"><i class="fa fa-eye-slash" onClick="printed_elements(this)"></i>&nbsp;&nbsp;<%if (language <> 2) then Response.Write(drawing.Fields.Item("urunadi").Value) else Response.Write(drawing.Fields.Item("urunadi_eng").Value) end if%>
+ 	<div class="cizim_adi">&nbsp;&nbsp;<%if (language <> 2) then Response.Write(drawing.Fields.Item("urunadi").Value) else Response.Write(drawing.Fields.Item("urunadi_eng").Value) end if%>
 <%
 Dim one_cikan_val, one_cikan_etiket_val, rozet_html
 one_cikan_val = 0
@@ -660,7 +660,7 @@ End If
 %>
 </div>
 
-<div class="left_container"><i class="fa fa-eye-slash" onClick="printed_elements(this)"></i>
+<div class="left_container">
 
  <!--(aciklamalar baslangic) -->
 
@@ -803,7 +803,7 @@ End If
 
 
 <div class="fiyat_title_container">
-<i class="fa fa-eye-slash" onClick="printed_elements(this)"></i>
+
 <div class="model_kodu">
 
 <%if (language <> 2) then Response.Write("MODEL KODU") else Response.Write("MODEL CODE") end if%></div>
@@ -940,7 +940,7 @@ end if
    	
 	    <!--36 = Kütle ve Setler -->	
 		<% if(drawing.Fields.Item("akno").Value <> "36" ) then %>
-        	<div class="cizim_bosluk"><i class="fa fa-eye-slash" onClick="printed_elements(this)"></i></div>
+        	<div class="cizim_bosluk"></div>
 		<%end if%>
 	
 	<% kapasite_line_reset_count = 1 %>
@@ -953,13 +953,13 @@ end if
 				<% else%>
    					
                     	<% if(drawing.Fields.Item("akno").Value = "36" ) then %>
-        					<div class="cizim_bosluk"><i class="fa fa-eye-slash" onClick="printed_elements(this)"></i></div>
+        					<div class="cizim_bosluk"></div>
 						<%end if%>
 	
 					
 					
 					<% if kapasite_line_reset_count = 0 then %>
-                   			<div class="cizim_bosluk_ufak"><i class="fa fa-eye-slash" onClick="printed_elements(this)"></i></div>
+                   			<div class="cizim_bosluk_ufak"></div>
 					<% end if%>
 				
 				<% end if %>
