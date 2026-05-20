@@ -1,0 +1,31 @@
+# ── Görsel klasörleri ──
+/images/
+/imgt/
+/imgttt/
+/img/
+/imgs/
+/assets/images/
+/uploads/
+
+# ── Görsel dosya uzantıları (proje genelinde) ──
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.bmp
+*.tiff
+*.tif
+*.svg
+*.ico
+*.avif
+
+# ── Büyük/binary dosyalar ──
+*.pdf
+*.zip
+*.rar
+
+# ── Sistem dosyaları ──
+Thumbs.db
+.DS_Store
+desktop.ini

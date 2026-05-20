@@ -321,13 +321,7 @@
   }
   .nav_dd_item.nav_dd_active i { opacity: 1; color: var(--amber); }
    
-/* Aktif dropdown item */
-.nav_dd_item.nav_dd_active {
-  background: rgba(232,160,32,.15);
-  color: var(--amber-light) !important;
-  border-left: 2px solid var(--amber);
-}
-.nav_dd_item.nav_dd_active i { opacity: 1; color: var(--amber); }
+
 
    /* Ayarlar paneli — geniş dropdown */
    .nav_settings_panel {

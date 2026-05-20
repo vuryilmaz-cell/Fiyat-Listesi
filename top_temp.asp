@@ -172,10 +172,6 @@
       <i class="fa-solid fa-users-gear"></i>
       <span><%if language<>2 then Response.Write("Bayi Yönetimi") else Response.Write("Dealer Mgmt") end if%></span>
     </a>
-    <a href="../../fiyat/default.asp" class="nav_item">
-      <i class="fa-solid fa-list-check"></i>
-      <span><%if language<>2 then Response.Write("Fiyat Listesi") else Response.Write("Price List") end if%></span>
-    </a>
 
       <a href="../../fiyat/admin/urun_listesi.asp" class="nav_item">
       <i class="fa-solid fa-list-check"></i>
