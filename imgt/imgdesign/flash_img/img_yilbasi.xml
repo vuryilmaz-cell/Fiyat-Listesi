@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<products>
+	<product>
+		<title_tr>Taşıt Kantarları...</title_tr>
+		<title_eng>Truck Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/1.jpg</img>
+	</product>
+	<product>
+		<title_tr>Çoklu Kantar Entegrasyonu...</title_tr>
+		<title_eng>Multi-Scale Integration ...</title_eng>
+		<img>imgt/imgdesign/flash_img/2.jpg</img>
+	</product>
+	<product>
+		<title_tr>Elektronik Basküller...</title_tr>
+		<title_eng>Industrial Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/3.jpg</img>
+	</product>
+	<product>
+		<title_tr>Taşıt Kantarları...</title_tr>
+		<title_eng>Truck Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/4.jpg</img>
+	</product>
+	<product>
+		<title_tr>Elektronik Platform Baskülleri...</title_tr>
+		<title_eng>Floor-Platform Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/5.jpg</img>
+	</product>
+	<product>
+		<title_tr>Vinç Kantarları...</title_tr>
+		<title_eng>Crane Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/6.jpg</img>
+	</product>
+	<product>
+		<title_tr>Ex-Proof Taşıt Kantarları...</title_tr>
+		<title_eng>Ex-Proof Truck Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/7.jpg</img>
+	</product>
+	<product>
+		<title_tr>Silo Alti Kantar Otomasyonu...</title_tr>
+		<title_eng>Under-Silo Vehicle Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/8.jpg</img>
+	</product>
+	<product>
+		<title_tr>Transpalet Baskülleri...</title_tr>
+		<title_eng>Transpallet Scale...</title_eng>
+		<img>imgt/imgdesign/flash_img/9.jpg</img>
+	</product>
+		<product>
+		<title_tr>Kontrol Baskülleri...</title_tr>
+		<title_eng>Weight Control System...</title_eng>
+		<img>imgt/imgdesign/flash_img/10.jpg</img>
+	</product>
+		<product>
+		<title_tr>LODRITE İş Makinası Tartım Sistemleri...</title_tr>
+		<title_eng>LODRITE Work Machine Weighing Systems...</title_eng>
+		<img>imgt/imgdesign/flash_img/11.jpg</img>
+	</product>
+		<product>
+		<title_tr>Bant Kantarları...</title_tr>
+		<title_eng>Belt Scales...</title_eng>
+		<img>imgt/imgdesign/flash_img/12.jpg</img>
+	</product>
+		<product>
+		<title_tr></title_tr>
+		<title_eng></title_eng>
+		<img>imgt/imgdesign/flash_img/13.jpg</img>
+	</product>
+</products>

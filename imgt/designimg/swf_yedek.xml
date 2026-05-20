@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<banners>
+
+	<banner>
+		<title_tr>Taşıt Kantarları...</title_tr>
+		<title_eng>Truck Scales...</title_eng>
+		<img>../../imgt/designimg/v-bridge.swf</img>
+	</banner>
+	<banner>
+		<title_tr>Teker Yıkama...</title_tr>
+		<title_eng>Truck Wash...</title_eng>
+		<img>../../imgt/designimg/truck_wash.swf</img>
+	</banner>
+
+	<banner>
+		<title_tr>Teker Yıkama...</title_tr>
+		<title_eng>Truck Wash...</title_eng>
+		<img>../../imgt/designimg/platform_baskulu.swf</img>
+	</banner>
+</banners>

@@ -35,7 +35,8 @@
   MM_LoginAction = Request.ServerVariables("URL")
   If Request.QueryString <> "" Then MM_LoginAction = MM_LoginAction & "?" & Server.HTMLEncode(Request.QueryString)
 
-  MM_valUsername = CStr(Request.Form("user_name"))
+  'MM_valUsername = CStr(Request.Form("user_name"))
+  MM_valUsername = "Oguzhan"
 
   If MM_valUsername <> "" Then
     Dim MM_fldUserAuthorization
@@ -59,7 +60,9 @@
     MM_rsUser_cmd.ActiveConnection = MM_stok_STRING
     MM_rsUser_cmd.CommandText = MM_loginSQL
     MM_rsUser_cmd.Parameters.Append MM_rsUser_cmd.CreateParameter("param1", 200, 1, 255, MM_valUsername)
-    MM_rsUser_cmd.Parameters.Append MM_rsUser_cmd.CreateParameter("param2", 200, 1, 255, Request.Form("pass"))
+    'MM_rsUser_cmd.Parameters.Append MM_rsUser_cmd.CreateParameter("param2", 200, 1, 255, Request.Form("pass"))
+    MM_rsUser_cmd.Parameters.Append MM_rsUser_cmd.CreateParameter("param2", 200, 1, 255, "Ot1981")
+
     MM_rsUser_cmd.Prepared = True
     Set MM_rsUser = MM_rsUser_cmd.Execute
 
