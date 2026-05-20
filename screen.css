@@ -732,7 +732,7 @@
    .cizim_adi i.fa-eye-slash:hover,
    .cizim_adi i.fa-eye:hover { opacity: .85; }
    
-   .cizim_bosluk      { clear: both; height: 2px; background: var(--border); }
+   .cizim_bosluk      { clear: both; height: 20px; background: var(--border); }
    .cizim_bosluk_ufak { clear: both; height: 1px; background: var(--border-light); }
 
    .cizim_bosluk > i.fa-eye-slash,
