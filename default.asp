@@ -569,6 +569,33 @@ On Error GoTo 0
       </div>
       <div class="filter_group" id="kapasite_select_result"></div>
 
+      <div class="filter_group" style="margin-left:auto;">
+  <label class="filter_label">&#160;</label>
+  <a onclick="yazdir()" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    background: var(--navy);
+    color: #fff;
+    border-radius: var(--r4);
+    font-family: var(--fhead);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: background .18s;
+    text-decoration: none;
+  "
+  onmouseover="this.style.background='var(--amber)';this.style.color='var(--navy)'"
+  onmouseout="this.style.background='var(--navy)';this.style.color='#fff'"
+  >
+    <i class="fa fa-print"></i> Yazdır
+  </a>
+</div>
+
       <input type="hidden" id="price_list_type" value="<%=price_list_type%>"/>
       <input type="hidden" id="language_type"   value="<%=language%>"/>
       <input type="hidden" id="user_type"        value="<%=Session("MM_UserAuthorization")%>"/>
